@@ -9,8 +9,10 @@ import sys, gym, time
 # python keyboard_agent.py SpaceInvadersNoFrameskip-v4
 #
 from ship_gym.ship_env import ShipEnv
+from ship_gym.game import ShipGame
 
-env = ShipEnv()
+
+env = ShipEnv(ShipGame(fps=1, speed=1, bounds=(500,500)), max_steps=1000)
 
 if not hasattr(env.action_space, 'n'):
     raise Exception('Keyboard agent only supports discrete action spaces')
@@ -38,8 +40,9 @@ def key_release(key, mod):
         human_agent_action = 0
 
 env.render()
-env.unwrapped.viewer.window.on_key_press = key_press
-env.unwrapped.viewer.window.on_key_release = key_release
+
+env.game.window.on_key_press = key_press
+# env.game.window.on_key_release = key_release
 
 def rollout(env):
     global human_agent_action, human_wants_restart, human_sets_pause

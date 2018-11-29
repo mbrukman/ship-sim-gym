@@ -119,7 +119,7 @@ def main():
 
 	game_fps = 1000
 	game_speed = 30
-	bounds = (800,800)
+	bounds = (200,200)
 
 	# Setting it to the number of CPU's you have is usually optimal
 	num_cpu = 8
@@ -142,7 +142,9 @@ Training Steps 	:\t {steps} / {max_steps}
 Number of goals :\t {n_goal} / {max_goals}
 Learning rate   :\t {lr} 
 			""")
+
 			train(ACER, env, n_goals, 0, lr, steps)
+			# train(ACER, env, n_goals, 0, lr, steps)
 
 	print("*" * 30)
 	print(" "*10,"     DONE!     ", " "*10)

@@ -24,7 +24,7 @@ class ShipEnv(Env):
 		print("Delete shipenv")
 
 	# TODO: Derive the discrete actions
-	def __init__(self, ship_game, max_steps=200, n_ship_track=2, history_size=2, n_goals=0, goal_gen='random'):
+	def __init__(self, ship_game, max_steps=200, n_ship_track=2, history_size=2, n_goals=0, goal_gen='random', spawn_point=None):
 		if n_ship_track < 0:
 			raise ValueError("n_ship_track must be non-negative")
 		if history_size < 1:
@@ -176,8 +176,8 @@ class ShipEnv(Env):
 				i += 1
 				self.game.add_goal(x, y)
 
-	def reset(self, spawn_point=(10,10)):
-		self.game.reset(spawn_point=spawn_point)
+	def reset(self):
+		self.game.reset(spawn_point=self.spawn_point)
 		self.last_action = None
 		self.reward = 0
 		self.cumulative_reward = 0
