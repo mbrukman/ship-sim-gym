@@ -65,8 +65,8 @@ if __name__ == '__main__':
     pbt = PopulationBasedTraining(
         time_attr="time_total_s",
         reward_attr="episode_reward_mean",
-        perturbation_interval=60 * 30,
-        resample_probability=0.25,
+        perturbation_interval=60 * 5,
+        resample_probability=0.5,
 
         # Specifies the mutations of these hyperparams
         hyperparam_mutations={
@@ -109,7 +109,7 @@ if __name__ == '__main__':
                 "run": "PPO",
                 # "run": train,
                 "env": "ShipGym-v1",
-                "num_samples": 28,  # Repeat the experiment this many times
+                "num_samples": 500,  # Repeat the experiment this many times
                 "checkpoint_at_end": True,
                 "checkpoint_freq": 10,
                 "config": {
@@ -123,10 +123,10 @@ if __name__ == '__main__':
                     # These params are tuned from a fixed starting value.
                     "lambda": 0.95,
                     "clip_param": 0.2,
+                    "lr": 0.001,
 
                     # These params start off randomly drawn from a set.
-                    "lr":
-                        lambda spec: random.choice([1e-3, 5e-4, 1e-4, 5e-5, 1e-5]),
+                    #    lambda spec: random.choice([1e-3, 5e-4, 1e-4, 5e-5, 1e-5]),
                     "num_sgd_iter":
                         lambda spec: random.choice([10, 20, 30]),
                     "sgd_minibatch_size":

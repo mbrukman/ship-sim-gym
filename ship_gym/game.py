@@ -10,6 +10,8 @@ import pymunk.pygame_util
 
 SHIP_TEMPLATE = [(0, 0), (0, 10), (5, 15), (10, 10), (10, 0)]
 
+import os
+os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 class GameObject(object):
 
