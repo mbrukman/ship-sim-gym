@@ -160,11 +160,15 @@ class ShipEnv(Env):
 
 
     def step(self, action):
-        assert self.action_space.contains(action), "%r (%s) invalid" % (action, type(action))
 
         if isinstance(self.action_space, Box):
-            self.game.handle_cont_action(action)
+            lb = self.action_space.low
+            ub = self.action_space.high
+            scaled_action = lb + (action + 1.) * 0.5 * (ub - lb)
+            scaled_action = np.clip(scaled_action, lb, ub)
+            self.game.handle_cont_action(scaled_action)
         else:
+            assert self.action_space.contains(action), "%r (%s) invalid" % (action, type(action))
             self.game.handle_discrete_action(action)
 
         self.game.update()

@@ -391,9 +391,12 @@ def main():
     import os
 
     cwd = os.getcwd()
-    
-    
-    g = ShipGame(debug_mode=True)
+    gc = GameConfig
+    gc.SPEED = 1
+    gc.FPS = 30
+    gc.DEBUG = True
+
+    g = ShipGame()
 
     while True:
 
